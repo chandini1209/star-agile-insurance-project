@@ -9,7 +9,7 @@ pipeline {
         stage('SCM_Checkout') {
             steps {
                echo "Perform SCM Checkout"
-			   git 'https://github.com/chandini1209/star-agile-health-care'			   
+			   git 'https://github.com/chandini1209/star-agile-insurance-project.git'			   
             }
         }
         stage('Application Build') {
@@ -21,9 +21,9 @@ pipeline {
         stage('Build Docker Image') {
             steps {
 				sh 'docker version'
-		    	sh "docker build --no-cache -t chandini964/healthcare-eta-app:${BUILD_NUMBER} ."
+		    	sh "docker build --no-cache -t chandini964/insurance-eta-app:${BUILD_NUMBER} ."
 				sh 'docker image list'
-				sh "docker tag chandini964/healthcare-eta-app:${BUILD_NUMBER} chandini964/healthcare-eta-app:latest"
+				sh "docker tag chandini964/insurance-eta-app:${BUILD_NUMBER} chandini964/insurance-eta-app:latest"
             }
         }
 		stage('Login2DockerHub') {
@@ -34,7 +34,7 @@ pipeline {
 		}
 		stage('Publish_to_Docker_Registry') {
 			steps {
-				sh "docker push chandini964/healthcare-eta-app:latest"
+				sh "docker push chandini964/insurance-eta-app:latest"
 			}
 		}
         stage('Deploy to Kubernetes Cluster') {
