@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: finance-eta-deploy
+  labels:
+    app: finance-eta-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: finance-eta-app
+  template:
+    metadata:
+      labels:
+        app: finance-eta-app
+    spec:
+      containers:
+      - name: finance-eta-container
+        image: chandini964/finance-eta-app
+        ports:
+        - containerPort: 8082
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: finance-eta-np-service
+  labels:
+    app: finance-eta-app
+spec:
+  selector:
+    app: finance-eta-app
+
+  type: NodePort
+  ports:
+  - nodePort: 31080
+    port: 8082
+    targetPort: 8082
