@@ -8,7 +8,7 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-      app: inusurance-eta-app
+      app: insurance-eta-app
   template:
     metadata:
       labels:
